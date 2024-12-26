@@ -12,7 +12,7 @@ Updating...
 - [**Trần Thành Tài**](https://github.com/tai3804)
 
 ## Badges
-![Java Version](https://img.shields.io/badge/Java-23-blue)
+![Java Version](https://img.shields.io/badge/Java-20-blue)
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)
 Updating...
 
