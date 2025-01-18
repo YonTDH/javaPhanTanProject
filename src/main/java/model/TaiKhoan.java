@@ -1,9 +1,11 @@
 package model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "tai_khoan")
+@Data
 public class TaiKhoan {
 
     @Id

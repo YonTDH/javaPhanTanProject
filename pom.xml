@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fit.iuh</groupId>
-    <artifactId>Deadline_GenerateData</artifactId>
+    <artifactId>Bookstore_Management_System</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Deadline_GenerateData</name>
+    <name>Bookstore_Management_System</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
