@@ -15,4 +15,7 @@ public class MauSac {
     @Column(name = "ten_mau")
     private String tenMau;
 
+    @OneToOne(mappedBy = "mauSac", cascade = CascadeType.ALL)
+    private VanPhongPham vanPhongPham;
+
 }

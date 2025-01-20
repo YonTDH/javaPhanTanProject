@@ -22,7 +22,7 @@ public class GenerateData {
     Faker faker = new Faker();
     private final Random random = new Random();
 
-    private TaiKhoan generateTaiKhoan(){
+    public TaiKhoan generateTaiKhoan(){
         TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setTenDangNhap(faker.internet().username());
         taiKhoan.setMatKhau(faker.internet().password());
@@ -31,7 +31,7 @@ public class GenerateData {
         return taiKhoan;
     }
 
-    private NhanVien generateNhanVien(){
+    public NhanVien generateNhanVien(){
         NhanVien nhanVien = new NhanVien();
         nhanVien.setHoTenNV(faker.name().name());
         nhanVien.setNgaySinh(randomDateBetween(1985, 2006));
@@ -43,7 +43,7 @@ public class GenerateData {
         return nhanVien;
     }
 
-    private CaLamViec generateCaLamViec(){
+    public CaLamViec generateCaLamViec(){
         CaLamViec caLamViec = new CaLamViec();
         LocalTime randomTime = randomTimeBetween(8, 18);
 
@@ -55,7 +55,7 @@ public class GenerateData {
 
 
     //Nhóm sản phẩm cho sách
-    private NhomSanPham generateNhomSach(){
+    public NhomSanPham generateNhomSach(){
         List<NhomSanPham> productGroups = new ArrayList<>();
 
         productGroups.add(new NhomSanPham("Sách giáo khoa"));
@@ -71,7 +71,7 @@ public class GenerateData {
     }
 
     //Nhóm sp cho văn phòng  phẩm
-    private NhomSanPham generateNhomVPP(){
+    public NhomSanPham generateNhomVPP(){
         List<NhomSanPham> productGroups = new ArrayList<>();
 
         productGroups.add(new NhomSanPham("Dụng cụ viết"));
@@ -85,7 +85,7 @@ public class GenerateData {
         return productGroups.get(faker.number().numberBetween(0, productGroups.size()));
     }
 
-    private Sach generateSach(){
+    public Sach generateSach(){
         Sach sach = new Sach();
 
         Double donGiaNhap = faker.number().randomDouble(2, 30000, 150000);
@@ -107,7 +107,7 @@ public class GenerateData {
         return sach;
     }
 
-    private VanPhongPham generateVanPhongPham(){
+    public VanPhongPham generateVanPhongPham(){
 
         Double donGiaNhap = faker.number().randomDouble(2, 30000, 100000);
 
@@ -125,7 +125,7 @@ public class GenerateData {
         return vanPhongPham;
     }
 
-    private MauSac generateMauSac(){
+    public MauSac generateMauSac(){
         MauSac mauSac = new MauSac();
         mauSac.setTenMau(faker.color().name());
 
@@ -134,7 +134,7 @@ public class GenerateData {
     }
 
 
-    private NhaCungCap generateNhaCungCap(){
+    public NhaCungCap generateNhaCungCap(){
         NhaCungCap nhaCungCap = new NhaCungCap();
         nhaCungCap.setTenNCC(faker.company().name());
         nhaCungCap.setEmail(faker.internet().emailAddress());
@@ -144,7 +144,7 @@ public class GenerateData {
         return  nhaCungCap;
     }
 
-    private KhachHang generateKhachHang(){
+    public KhachHang generateKhachHang(){
         KhachHang khachHang = new KhachHang();
 
         khachHang.setTenKhachHang(faker.name().name());
@@ -153,7 +153,7 @@ public class GenerateData {
         return khachHang;
     }
 
-    private KhuyenMai generateKhuyenMai(){
+    public KhuyenMai generateKhuyenMai(){
         LocalDateTime startDate = generateRandomDateTime(2025, 1, 20, 7, 30, 2025, 12, 20, 21, 0);
         LocalDateTime endDate = startDate.plusMonths(3);
 
@@ -252,7 +252,7 @@ public class GenerateData {
 
     }
 
-    private <T extends Enum<?>> T getRandomEnumValue(Class<T> enumClass) {
+    public  <T extends Enum<?>> T getRandomEnumValue(Class<T> enumClass) {
         T[] enumValues = enumClass.getEnumConstants();
         int randomIndex = ThreadLocalRandom.current().nextInt(enumValues.length);
         return enumValues[randomIndex];
