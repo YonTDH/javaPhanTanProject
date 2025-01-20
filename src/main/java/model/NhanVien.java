@@ -33,7 +33,7 @@ public class NhanVien {
     @JoinColumn(name = "tai_khoan")
     private TaiKhoan taiKhoan;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "chuc_vu")
     private ChucVu chucVu;
 
