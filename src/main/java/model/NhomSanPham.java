@@ -16,4 +16,7 @@ public class NhomSanPham {
     @Column(name = "ten_nhom_san_pham")
     private String tenNhomSanPham;
 
+    public NhomSanPham(String tenNhomSanPham) {
+        this.tenNhomSanPham = tenNhomSanPham;
+    }
 }

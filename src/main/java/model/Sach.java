@@ -1,9 +1,11 @@
 package model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @DiscriminatorValue("Sach")
+@Data
 public class Sach extends SanPham{
     @Column(name = "tac_gia")
     private String tacGia;

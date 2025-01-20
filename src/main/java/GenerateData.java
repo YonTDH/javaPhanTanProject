@@ -144,6 +144,39 @@ public class GenerateData {
         return  nhaCungCap;
     }
 
+    private KhachHang generateKhachHang(){
+        KhachHang khachHang = new KhachHang();
+
+        khachHang.setTenKhachHang(faker.name().name());
+        khachHang.setNhomKhachHang(getRandomEnumValue(NhomKhachHang.class));
+        khachHang.setSoDienThoai(faker.phoneNumber().phoneNumber());
+        return khachHang;
+    }
+
+    private KhuyenMai generateKhuyenMai(){
+        LocalDateTime startDate = generateRandomDateTime(2025, 1, 20, 7, 30, 2025, 12, 20, 21, 0);
+        LocalDateTime endDate = startDate.plusMonths(3);
+
+        KhuyenMai khuyenMai = new KhuyenMai();
+        khuyenMai.setTyLeKhuyenMai(faker.number().randomDouble(2, 0, 1));
+        khuyenMai.setTenKhuyenMai(faker.commerce().productName());
+        khuyenMai.setNgayBatDau(startDate);
+        khuyenMai.setNgayKetThuc(endDate);
+        khuyenMai.setGhiChu(faker.commerce().promotionCode());
+
+        if (LocalDateTime.now().isBefore(startDate)) {
+            khuyenMai.setTrangThai("scheduled");
+        } else if (LocalDateTime.now().isBefore(endDate) && startDate.isBefore(LocalDateTime.now())) {
+            khuyenMai.setTrangThai("active");
+        } else if (LocalDateTime.now().isAfter(endDate)) {
+            khuyenMai.setTrangThai("expired");
+        } else {
+            khuyenMai.setTrangThai("inactive");
+        }
+
+        return khuyenMai;
+    }
+
 
 
     public static void main(String[] args) {
@@ -153,6 +186,21 @@ public class GenerateData {
             NhanVien nhanVien = new GenerateData().generateNhanVien();
             TaiKhoan taiKhoan = new GenerateData().generateTaiKhoan();
             CaLamViec caLamViec = new GenerateData().generateCaLamViec();
+            Sach sach = new GenerateData().generateSach();
+            VanPhongPham vanPhongPham = new GenerateData().generateVanPhongPham();
+            NhaCungCap nhaCungCap = new GenerateData().generateNhaCungCap();
+            MauSac mauSac = new GenerateData().generateMauSac();
+            NhomSanPham nhomSanPhamSach = new GenerateData().generateNhomSach();
+            NhomSanPham nhomVPP = new GenerateData().generateNhomVPP();
+            KhachHang khachHang = new GenerateData().generateKhachHang();
+            KhuyenMai khuyenMai = new GenerateData().generateKhuyenMai();
+
+
+            sach.setNhomSanPham(nhomSanPhamSach);
+            sach.setNhaCungCap(nhaCungCap);
+            vanPhongPham.setNhaCungCap(nhaCungCap);
+            vanPhongPham.setNhomSanPham(nhomVPP);
+            vanPhongPham.setMauSac(mauSac);
 
             nhanVien.setTaiKhoan(taiKhoan);
 
@@ -163,11 +211,27 @@ public class GenerateData {
             nhanVien.setChucVu(new GenerateData().getRandomEnumValue(ChucVu.class));
             nhanVien.setCaLamViec(caLamViec);
 
+
+
+
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
 
             em.persist(caLamViec);
             em.persist(nhanVien);
+            em.persist(khachHang);
+
+            em.persist(nhaCungCap);
+            em.persist(nhomSanPhamSach);
+            em.persist(nhomVPP);
+            em.persist(sach);
+            em.persist(mauSac);
+            em.persist(vanPhongPham);
+            em.persist(khuyenMai);
+
+
+
+
 
             transaction.commit();
 
@@ -204,5 +268,20 @@ public class GenerateData {
         int randomSecond = ThreadLocalRandom.current().nextInt(startSecond, endSecond + 1);
 
         return LocalTime.ofSecondOfDay(randomSecond);
+    }
+
+    public static LocalDateTime generateRandomDateTime(int startYear, int startMonth, int startDate, int startHour, int startMinute,
+                                                       int endYear, int endMonth, int endDate, int endHour, int endMinute
+    ) {
+        LocalDateTime startDateTime = LocalDateTime.of(startYear,startMonth,startDate,startHour,startMinute, 0, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(endYear,endMonth ,endDate,endHour, endMinute, 59, 0);
+
+        long startEpoch = startDateTime.atZone(java.time.ZoneId.systemDefault()).toEpochSecond();
+        long endEpoch = endDateTime.atZone(java.time.ZoneId.systemDefault()).toEpochSecond();
+
+        long randomEpoch = ThreadLocalRandom.current().nextLong(startEpoch, endEpoch);
+
+
+        return LocalDateTime.ofEpochSecond(randomEpoch, 0, java.time.ZoneOffset.UTC);
     }
 }

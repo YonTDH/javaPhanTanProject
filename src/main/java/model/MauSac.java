@@ -1,9 +1,11 @@
 package model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "mau_sac")
+@Data
 public class MauSac {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
