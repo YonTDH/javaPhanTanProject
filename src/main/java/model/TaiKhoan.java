@@ -2,6 +2,7 @@ package model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "tai_khoan")
@@ -22,6 +23,6 @@ public class TaiKhoan {
     @Column(name = "email")
     private String email;
 
-    @OneToOne(mappedBy = "taiKhoan")
+    @OneToOne(mappedBy = "taiKhoan", cascade = CascadeType.PERSIST)
     private NhanVien nhanVien;
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.security.Timestamp;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,10 @@ public class CaLamViec {
     private String tenCa;
 
     @Column(name = "thoi_gian_bat_dau")
-    private Timestamp thoiGianBatDau;
+    private LocalTime thoiGianBatDau;
 
     @Column(name = "thoi_gian_ket_thuc")
-    private Timestamp thoiGianKetThuc;
+    private LocalTime thoiGianKetThuc;
 
     @OneToMany(mappedBy = "caLamViec")
     private List<NhanVien> nhanVienList;
