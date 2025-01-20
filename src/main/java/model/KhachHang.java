@@ -18,6 +18,7 @@ public class KhachHang {
     @Column(name = "so_dien_thoai")
     private String soDienThoai;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "nhom_khach_hang")
     private NhomKhachHang nhomKhachHang;
 

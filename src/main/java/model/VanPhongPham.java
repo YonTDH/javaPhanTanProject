@@ -1,11 +1,13 @@
 package model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 @Entity
 @DiscriminatorValue("Van Phong Pham")
+@Data
 public class VanPhongPham extends SanPham{
     @OneToOne
     @JoinColumn(name = "ma_mau")
