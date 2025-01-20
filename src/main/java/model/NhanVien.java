@@ -1,6 +1,7 @@
 package model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.checkerframework.checker.units.qual.C;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "nhan_vien")
+@Data
 public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +25,9 @@ public class NhanVien {
     @Column(name = "so_dien_thoai")
     private String soDienThoai;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gioi_tinh")
-    private boolean gioiTinh;
+    private GioiTinh gioiTinh;
 
     @Column(name = "email")
     private String email;
