@@ -35,6 +35,11 @@ public class NhanVien {
     @Column(name = "ngayVaoLam")
     private Date ngayVaoLam;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "caLamViec")
+    private CaLamViec caLamViec;
+
     @Column(name = "trangThai")
     private Boolean trangThai;
 

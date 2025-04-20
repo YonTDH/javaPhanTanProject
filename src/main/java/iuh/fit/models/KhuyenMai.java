@@ -1,57 +1,78 @@
 package iuh.fit.models;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
-import lombok.*;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Entity
-@Table(name = "KhuyenMai")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class KhuyenMai {
+@Entity
+@Table(name = "KhuyenMai")
+@NamedQueries({
+        @NamedQuery(name = "KhuyenMai.getAlltbKM", query = "SELECT k FROM KhuyenMai k"),
+        @NamedQuery(name = "KhuyenMai.getAlltbKMTheoDangChay", query = "SELECT k FROM KhuyenMai k WHERE k.trangThai = 'Đang hoạt động'"),
+        @NamedQuery(name = "KhuyenMai.getKhuyenMaiByMaKhuyenMai", query = "SELECT k FROM KhuyenMai k WHERE k.maKhuyenMai = :maKhuyenMai")
+})
+public class KhuyenMai implements Serializable {
+
+    private static final long serialVersionUID = 9148093557088718028L;
 
     @Id
-    @Column(name = "maKhuyenMai", nullable = false, unique = true, length = 50)
+    @Column(name = "maKhuyenMai", columnDefinition = "nvarchar(50)")
     private String maKhuyenMai;
 
-    @Column(name = "tenKhuyenMai", nullable = false, length = 255)
+    @Column(name = "tenKhuyenMai", columnDefinition = "nvarchar(255)", nullable = false)
     private String tenKhuyenMai;
 
-    @Column(name = "moTa", columnDefinition = "TEXT")
-    private String moTa;
+    @Column(name = "ghiChu", columnDefinition = "nvarchar(255)")
+    private String ghiChu;
 
-    @Column(name = "phanTramGiam", precision = 5, scale = 2)
-    private BigDecimal phanTramGiam;
+    @Column(name = "trangThai", columnDefinition = "nvarchar(255)")
+    private String trangThai;
 
-    @Column(name = "soTienGiam", precision = 18, scale = 2)
-    private BigDecimal soTienGiam;
+    @Column(name = "tyLeKhuyenMai")
+    private double tyLeKhuyenMai;
 
-    @Column(name = "ngayBatDau", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayBatDau;
+    @Column(name = "tienToiThieu")
+    private double tienToiThieu;
 
-    @Column(name = "ngayKetThuc", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayKetThuc;
+    @Column(name = "giaTriKhuyenMaiToiDa")
+    private double giaTriKhuyenMaiToiDa;
 
-    @Column(name = "trangThai", nullable = false)
-    private Boolean trangThai; // true - đang áp dụng, false - đã kết thúc
+    @Column(name = "ngayBatDau")
+    private LocalDateTime ngayBatDau;
 
-    // Quan hệ với nhóm khuyến mãi
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maNhomKhuyenMai", referencedColumnName = "maNhom")
-    private NhomKhuyenMai nhomKhuyenMai;
+    @Column(name = "ngayKetThuc")
+    private LocalDateTime ngayKetThuc;
 
-    // Quan hệ một-nhiều với SanPham
-    @OneToMany(mappedBy = "khuyenMai", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SanPham> danhSachSanPham;
+    // Constructor đầy đủ
+    public KhuyenMai(String maKhuyenMai, String tenKhuyenMai, String ghiChu, String trangThai, double tyLeKhuyenMai,
+                     double tienToiThieu, double giaTriKhuyenMaiToiDa, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) {
+        this.maKhuyenMai = maKhuyenMai;
+        this.tenKhuyenMai = tenKhuyenMai;
+        this.ghiChu = ghiChu;
+        this.trangThai = trangThai;
+        this.tyLeKhuyenMai = tyLeKhuyenMai;
+        this.tienToiThieu = tienToiThieu;
+        this.giaTriKhuyenMaiToiDa = giaTriKhuyenMaiToiDa;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+    }
 
-    @OneToMany(mappedBy = "khuyenMai", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HoaDon> danhSachHoaDon;
+    public KhuyenMai(String maKhuyenMai) {
+        this.maKhuyenMai = maKhuyenMai;
+    }
 }
+

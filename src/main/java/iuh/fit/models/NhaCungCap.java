@@ -1,5 +1,11 @@
 package iuh.fit.models;
 
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "NhaCungCap")
 @NamedQueries({
@@ -28,6 +34,18 @@ public class NhaCungCap implements Serializable {
 
     public NhaCungCap(String maNhaCungCap) {
         this.maNhaCungCap = maNhaCungCap;
+    }
+
+    public NhaCungCap() {
+
+    }
+
+    public NhaCungCap(String maNhaCungCap, String tenNhaCungCap, String diaChi, String soDienThoai, Set<SanPham> danhSachSanPham) {
+        this.maNhaCungCap = maNhaCungCap;
+        this.tenNhaCungCap = tenNhaCungCap;
+        this.diaChi = diaChi;
+        this.soDienThoai = soDienThoai;
+        this.danhSachSanPham = danhSachSanPham;
     }
 
     @Override

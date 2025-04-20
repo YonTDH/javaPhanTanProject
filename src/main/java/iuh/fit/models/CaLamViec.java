@@ -48,6 +48,7 @@ public class CaLamViec implements Serializable {
         this.maCa = maCa;
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(maCa);
