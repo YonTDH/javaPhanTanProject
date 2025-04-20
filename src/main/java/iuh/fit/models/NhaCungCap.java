@@ -1,38 +1,55 @@
 package iuh.fit.models;
 
-import lombok.*;
-import jakarta.persistence.*;
-import java.util.List;
-
 @Entity
 @Table(name = "NhaCungCap")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class NhaCungCap {
+@NamedQueries({
+        @NamedQuery(name = "NhaCungCap.getAll", query = "SELECT n FROM NhaCungCap n"),
+        @NamedQuery(name = "NhaCungCap.findByTen", query = "SELECT n FROM NhaCungCap n WHERE n.tenNhaCungCap = :tenNhaCungCap")
+})
+public class NhaCungCap implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "maNhaCungCap", nullable = false, unique = true, length = 50)
+    @Column(name = "maNhaCungCap")
     private String maNhaCungCap;
 
-    @Column(name = "tenNhaCungCap", nullable = false, length = 255)
+    @Column(name = "tenNhaCungCap", columnDefinition = "nvarchar(255)")
     private String tenNhaCungCap;
 
-    @Column(name = "diaChi", length = 500)
+    @Column(name = "diaChi", columnDefinition = "nvarchar(255)")
     private String diaChi;
 
-    @Column(name = "soDienThoai", length = 20)
+    @Column(name = "soDienThoai", columnDefinition = "nvarchar(50)")
     private String soDienThoai;
 
-    @Column(name = "email", length = 100)
-    private String email;
+   @OneToMany(mappedBy = "nhaCungCap", fetch = FetchType.LAZY)
+   private Set<SanPham> danhSachSanPham;
 
-    @Column(name = "trangThai", nullable = false)
-    private Boolean trangThai; // true - đang hợp tác, false - ngừng hợp tác
+    public NhaCungCap(String maNhaCungCap) {
+        this.maNhaCungCap = maNhaCungCap;
+    }
 
-    // Quan hệ một-nhiều với SanPham
-    @OneToMany(mappedBy = "nhaCungCap", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SanPham> danhSachSanPham;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NhaCungCap)) return false;
+        NhaCungCap that = (NhaCungCap) o;
+        return Objects.equals(maNhaCungCap, that.maNhaCungCap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maNhaCungCap);
+    }
+
+    @Override
+    public String toString() {
+        return "NhaCungCap{" +
+                "maNhaCungCap='" + maNhaCungCap + '\'' +
+                ", tenNhaCungCap='" + tenNhaCungCap + '\'' +
+                ", diaChi='" + diaChi + '\'' +
+                ", soDienThoai='" + soDienThoai + '\'' +
+                '}';
+    }
 }
