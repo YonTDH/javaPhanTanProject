@@ -1,3 +1,4 @@
+// src/main/java/iuh/fit/models/HoaDonHoanTra.java
 package iuh.fit.models;
 
 import java.io.Serializable;
