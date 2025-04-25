@@ -18,7 +18,7 @@ public class ChiTietHoaDonDoi {
 
     @MapsId("maHoaDonDoiHang")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "HoaDonDoiHang", insertable = false, updatable = false)
+    @JoinColumn(name = "maHoaDonDoiHang", insertable = false, updatable = false)
     private HoaDonDoiHang hoaDonDoiHang;
 
     @MapsId("maSanPham")
