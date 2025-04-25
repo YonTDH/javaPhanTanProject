@@ -14,5 +14,5 @@ public interface DAO_HoaDon extends Remote {
 	public boolean updateHoaDon(HoaDon hd) throws RemoteException;	
 	public HoaDon getHoaDontheoMa(String ma) throws RemoteException;
 	public boolean deleteHoaDon(String maHD) throws RemoteException;
-	public String getMaHoaDonTheoNgay(String ngayLapHD) throws RemoteException;
+	public List<String> getMaHoaDonTheoNgay(String ngayLapHD) throws RemoteException;
 }
