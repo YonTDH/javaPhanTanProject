@@ -64,6 +64,4 @@ public class DaoImpl_Sach implements DAO_Sach {
             return false;
         }
     }
-
-
 }
