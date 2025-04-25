@@ -8,10 +8,10 @@ import jakarta.persistence.EntityManager;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public class DaoImp_VanPhongPham implements DAO_VanPhongPham {
+public class DaoImpl_VanPhongPham implements DAO_VanPhongPham {
     private static final long serialVersionUID = 1L;
     private EntityManager em;
-    public DaoImp_VanPhongPham() throws RemoteException {
+    public DaoImpl_VanPhongPham() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
     @Override
