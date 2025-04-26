@@ -48,5 +48,10 @@ public class NhanVien {
 
     @OneToMany(mappedBy = "nhanVien", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<HoaDon> danhSachHoaDon;
+
+
+    @OneToOne
+    @JoinColumn(name = "taiKhoan")
+    private TaiKhoan taiKhoan;
 }
 
