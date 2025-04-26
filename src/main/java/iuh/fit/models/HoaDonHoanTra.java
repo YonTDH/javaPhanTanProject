@@ -1,4 +1,3 @@
-// src/main/java/iuh/fit/models/HoaDonHoanTra.java
 package iuh.fit.models;
 
 import java.io.Serializable;
@@ -76,8 +75,8 @@ public class HoaDonHoanTra implements Serializable {
     }
 
     // Hàm tiện ích
-//    public void addChiTietHoanTra(ChiTietHoanTra chiTiet) {
-//        this.chiTietHoanTra.add(chiTiet);
-//        chiTiet.setHoaDonHoanTra(this);
-//    }
+    public void addChiTietHoanTra(ChiTietHoanTra chiTiet) {
+        this.chiTietHoanTra.add(chiTiet);
+        chiTiet.setHoaDonHoanTra(this);
+    }
 }

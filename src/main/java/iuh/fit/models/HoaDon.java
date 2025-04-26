@@ -1,56 +1,55 @@
 package iuh.fit.models;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Set;
+
 import jakarta.persistence.*;
+
 import lombok.*;
 
-import java.util.Date;
-
-@Entity
-@Table(name = "HoaDon")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class HoaDon {
+@ToString
+@Entity
+@Table(name = "HoaDon")
+@NamedQueries({
+        @NamedQuery(name = "HoaDon.getAll", query = "SELECT hd FROM HoaDon hd"),
+        @NamedQuery(name = "HoaDon.findByMa", query = "SELECT hd FROM HoaDon hd WHERE hd.maHoaDon = :maHoaDon"),
+        @NamedQuery(name = "HoaDon.findByKhachHang", query = "SELECT hd FROM HoaDon hd WHERE hd.khachHang.maKhachHang = :maKhachHang")
+})
+public class HoaDon implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "maHoaDon", length = 50)
     private String maHoaDon;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(
-            name = "ngayTao",
-            columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP",
-            insertable = false,
-            updatable = false
-    )
-    private Date ngayTao;
+    @Column(name = "ngayLap")
+    private LocalDateTime ngayLap;
 
     private double tongTien;
 
+    @Column(name = "hinhThucThanhToan", columnDefinition = "nvarchar(255)")
+    private String hinhThucThanhToan;
+
+    @Column(name = "ghiChu", columnDefinition = "nvarchar(255)")
+    private String ghiChu;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maKhuyenMai")
-    private KhuyenMai khuyenMai;
-
-    private double soTienGiam;
-
-    // --- thanhTien mặc định = tongTien - soTienGiam (MySQL GENERATED COLUMN) ---
-    @Column(
-            name = "thanhTien",
-            columnDefinition = "DOUBLE GENERATED ALWAYS AS (tongTien - soTienGiam) STORED",
-            insertable = false,
-            updatable = false
-    )
-    private double thanhTien;
-
-    // Đảm bảo ánh xạ chính xác đến mối quan hệ trong KhachHang
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "maKhachHang")
     private KhachHang khachHang;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "maNhanVien")
     private NhanVien nhanVien;
-}
 
+    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<ChiTietHoaDon> chiTietHoaDon;
+
+    public HoaDon(String maHoaDon) {
+        this.maHoaDon = maHoaDon;
+    }
+}

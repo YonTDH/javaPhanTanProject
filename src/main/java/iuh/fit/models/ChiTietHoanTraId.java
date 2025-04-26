@@ -1,17 +1,8 @@
 package iuh.fit.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EmbeddedId;
-import lombok.*;
 import java.io.Serializable;
 import java.util.Objects;
-import java.io.Serializable;
 
-@Embeddable
-@Getter
-@Setter
-@EqualsAndHashCode
 public class ChiTietHoanTraId implements Serializable {
     private static final long serialVersionUID = 1L;
 

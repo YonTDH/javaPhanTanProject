@@ -1,52 +1,52 @@
 package iuh.fit.models;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
+
 import lombok.*;
 
-import java.util.Date;
-import java.util.List;
-
-@Entity
-@Table(name = "KhachHang")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class KhachHang {
+@ToString
+@Entity
+@Table(name = "KhachHang")
+@NamedQueries({
+        @NamedQuery(name = "KhachHang.getAll", query = "SELECT kh FROM KhachHang kh"),
+        @NamedQuery(name = "KhachHang.getByEmail", query = "SELECT kh FROM KhachHang kh WHERE kh.email = :email")
+})
+public class KhachHang implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "maKhachHang", length = 50, nullable = false, unique = true)
     private String maKhachHang;
 
-    @Column(name = "tenKhachHang", nullable = false, length = 100)
-    private String tenKhachHang;
+    @Column(name = "hoTenKH", columnDefinition = "nvarchar(255)")
+    private String hoTenKH;
 
-    @Column(name = "soDienThoai", length = 15)
+    private LocalDate ngaySinh;
+
+    @Column(name = "soDienThoai", columnDefinition = "nvarchar(20)")
     private String soDienThoai;
 
-    @Column(name = "email", length = 100)
-    private String email;
-
-    @Column(name = "diaChi", length = 255)
+    @Column(name = "diaChi", columnDefinition = "nvarchar(255)")
     private String diaChi;
 
-    @Temporal(TemporalType.DATE)
-    @Column(
-            name = "ngayDangKy",
-            columnDefinition = "DATE DEFAULT CURRENT_DATE",
-            insertable = false,
-            updatable = false
-    )
-    private Date ngayDangKy;
+    @Column(name = "email", columnDefinition = "nvarchar(255)", unique = true)
+    private String email;
 
-    private Boolean trangThai;
+    @Column(name = "gioiTinh", columnDefinition = "nvarchar(10)")
+    private String gioiTinh;
 
+    public KhachHang(String maKhachHang) {
+        this.maKhachHang = maKhachHang;
+    }
     @Enumerated(EnumType.STRING)
-    @Column(length = 50)
+    @Column(name = "nhomKhachHang", columnDefinition = "nvarchar(50)")
     private NhomKhachHang nhomKhachHang;
 
-    // Sửa 'mappedBy' thành 'khachHang' để ánh xạ chính xác
-    @OneToMany(mappedBy = "khachHang", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HoaDon> danhSachHoaDon;
 }

@@ -1,45 +1,62 @@
 package iuh.fit.models;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 import jakarta.persistence.*;
+
 import lombok.*;
 
-@Entity
-@Table(name = "ChiTietHoaDon")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ChiTietHoaDon {
+@Entity
+@Table(name = "ChiTietHoaDon")
+@NamedQueries({
+        @NamedQuery(name = "ChiTietHoaDon.getAll", query = "SELECT cthd FROM ChiTietHoaDon cthd"),
+        @NamedQuery(name = "ChiTietHoaDon.findByHoaDon", query = "SELECT cthd FROM ChiTietHoaDon cthd WHERE cthd.hoaDon.maHoaDon = :maHoaDon")
+})
+public class ChiTietHoaDon implements Serializable {
 
-    // Mã chi tiết hóa đơn (nếu cần, bạn có thể thêm mã riêng)
+    private static final long serialVersionUID = 1L;
+
     @EmbeddedId
-    private ChiTietHoaDonPK maChiTietHoaDon;
+    private ChiTietHoaDonPK id;
 
-    @MapsId("maHoaDon")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maHoaDon", insertable = false, updatable = false)
+    @MapsId("maHoaDon")
+    @JoinColumn(name = "maHoaDon")
     private HoaDon hoaDon;
 
-    @MapsId("maSanPham")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maSanPham", insertable = false, updatable = false)
+    @MapsId("maSanPham")
+    @JoinColumn(name = "maSanPham")
     private SanPham sanPham;
 
-    // Số lượng sản phẩm trong chi tiết hóa đơn
-    @Column(name = "soLuong")
     private int soLuong;
+    private double donGia;
+    private double giamGia;
 
-    // Giá tiền của sản phẩm tại thời điểm bán
-    @Column(name = "giaTien")
-    private double giaTien;
+    public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham, int soLuong, double donGia, double giamGia) {
+        this.hoaDon = hoaDon;
+        this.sanPham = sanPham;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.giamGia = giamGia;
+        this.id = new ChiTietHoaDonPK(hoaDon.getMaHoaDon(), sanPham.getMaSanPham());
+    }
 
-    // Thành tiền (Số lượng * Giá tiền)
-    @Column(name = "thanhTien")
-    private double thanhTien;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChiTietHoaDon)) return false;
+        ChiTietHoaDon that = (ChiTietHoaDon) o;
+        return Objects.equals(id, that.id);
+    }
 
-    // Hàm tính thành tiền cho chi tiết hóa đơn
-    public void tinhThanhTien() {
-        this.thanhTien = this.soLuong * this.giaTien;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

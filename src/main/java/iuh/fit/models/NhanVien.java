@@ -1,57 +1,131 @@
 package iuh.fit.models;
 
-import jakarta.persistence.*;
-import lombok.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
 
-import java.util.Date;
-import java.util.List;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQueries;
+import jakarta.persistence.NamedNativeQuery;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Entity
-@Table(name = "NhanVien")
 @Getter
 @Setter
+@ToString
+@Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class NhanVien {
+@Table(name = "NhanVien")
+@NamedQueries({
+        @NamedQuery(name = "NhanVien.getAllNhanVien", query = "SELECT n FROM NhanVien n"),
+        @NamedQuery(name = "NhanVien.getAllNhanVien_20", query = "SELECT n FROM NhanVien n"),
+        @NamedQuery(name = "NhanVien.locNhanVien", query = "SELECT kh FROM NhanVien kh " +
+                "WHERE (kh.maNhanVien LIKE :data OR kh.hoTenNV LIKE :data OR kh.soDienThoai LIKE :data)"),
+        @NamedQuery(name = "NhanVien.locNhanVienTheoChucVu", query = "SELECT n FROM NhanVien n WHERE n.chucVu = :value"),
+        @NamedQuery(name = "NhanVien.getNhanVienTheoCa", query = "SELECT n FROM NhanVien n WHERE n.caLamViec = :value")
+})
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "NhanVien.getAllNhanVienTheoCa", query = "SELECT * FROM NhanVien WHERE caLamViec = ?")
+})
+public class NhanVien implements Serializable {
+
+    private static final long serialVersionUID = 5549263630083775424L;
 
     @Id
-    @Column(name = "maNhanVien", length = 50)
+    @Column(name = "maNhanVien", columnDefinition = "nvarchar(255)")
     private String maNhanVien;
 
-    @Column(name = "tenNhanVien", length = 100, nullable = false)
-    private String tenNhanVien;
+    @Column(name = "hoTenNV", columnDefinition = "nvarchar(255)")
+    private String hoTenNV;
 
-    @Column(name = "soDienThoai", length = 15)
+    @Column(name = "ngaySinh")
+    private LocalDate ngaySinh;
+
+    @Column(name = "soDienThoaiNV", columnDefinition = "nvarchar(255)")
     private String soDienThoai;
 
-    @Column(name = "email", length = 100)
+    @Column(name = "gioiTinh", columnDefinition = "nvarchar(255)")
+    private String gioiTinh;
+
+    @Column(name = "email", columnDefinition = "nvarchar(255)")
     private String email;
 
-    @Column(name = "diaChi", length = 255)
-    private String diaChi;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "taiKhoan")
+    private TaiKhoan taiKhoan;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "ngayVaoLam")
-    private Date ngayVaoLam;
 
+    @Column(name = "tinhTrangLamViec")
+    private int tinhTrangLamViec;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "caLamViec")
     private CaLamViec caLamViec;
 
-    @Column(name = "trangThai")
-    private Boolean trangThai;
-
     @Enumerated(EnumType.STRING)
+    @Column(name = "chucVu", columnDefinition = "nvarchar(50)")
     private ChucVu chucVu;
 
-    @OneToMany(mappedBy = "nhanVien", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HoaDon> danhSachHoaDon;
+    public NhanVien(String ma) {
+        this.maNhanVien = ma;
+    }
 
 
-    @OneToOne
-    @JoinColumn(name = "taiKhoan")
-    private TaiKhoan taiKhoan;
+
+    public NhanVien(String maNhanVien, String hoTenNV, LocalDate ngaySinh, String soDienThoai, String gioiTinh,
+                    String email, TaiKhoan taiKhoanStr, int tinhTrangLamViec, String caLamViecStr, ChucVu chucVu) {
+        this.maNhanVien = maNhanVien;
+        this.hoTenNV = hoTenNV;
+        this.ngaySinh = ngaySinh;
+        this.soDienThoai = soDienThoai;
+        this.gioiTinh = gioiTinh;
+        this.email = email;
+        this.taiKhoan = taiKhoanStr;
+        this.tinhTrangLamViec = tinhTrangLamViec;
+        this.caLamViec = new CaLamViec(caLamViecStr);
+        this.chucVu = chucVu;
+    }
+
+    public NhanVien(String maNhanVien, String hoTenNV, LocalDate ngaySinh, String soDienThoai, String gioiTinh,
+                    String email, int tinhTrangLamViec, String caLamViecStr, ChucVu chucVu) {
+        this.maNhanVien = maNhanVien;
+        this.hoTenNV = hoTenNV;
+        this.ngaySinh = ngaySinh;
+        this.soDienThoai = soDienThoai;
+        this.gioiTinh = gioiTinh;
+        this.email = email;
+        this.tinhTrangLamViec = tinhTrangLamViec;
+        this.caLamViec = new CaLamViec(caLamViecStr);
+        this.chucVu = chucVu;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maNhanVien);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof NhanVien)) return false;
+        NhanVien other = (NhanVien) obj;
+        return Objects.equals(this.maNhanVien, other.maNhanVien);
+    }
+
+
 }
-

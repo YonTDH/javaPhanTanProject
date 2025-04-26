@@ -1,19 +1,32 @@
-// ChiTietHoaDonDoiId.java
 package iuh.fit.models;
 
-import jakarta.persistence.Embeddable;
-import lombok.*;
-
 import java.io.Serializable;
+import java.util.Objects;
 
-@Embeddable
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode
 public class ChiTietHoaDonDoiId implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    private String maHoaDonDoiHang;
-    private String maSanPham;
+    private HoaDonDoiHang hoaDonDoiHang;
+    private SanPham sanPham;
+
+    public ChiTietHoaDonDoiId() {}
+
+    public ChiTietHoaDonDoiId(HoaDonDoiHang hoaDonDoiHang, SanPham sanPham) {
+        this.hoaDonDoiHang = hoaDonDoiHang;
+        this.sanPham = sanPham;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChiTietHoaDonDoiId)) return false;
+        ChiTietHoaDonDoiId that = (ChiTietHoaDonDoiId) o;
+        return Objects.equals(hoaDonDoiHang, that.hoaDonDoiHang) &&
+                Objects.equals(sanPham, that.sanPham);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hoaDonDoiHang, sanPham);
+    }
 }
