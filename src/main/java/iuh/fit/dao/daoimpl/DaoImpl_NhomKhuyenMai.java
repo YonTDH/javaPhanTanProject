@@ -1,0 +1,26 @@
+package iuh.fit.dao.daoimpl;
+
+import iuh.fit.dao.DAO_NhomKhuyenMai;
+import iuh.fit.models.KhuyenMai;
+import iuh.fit.models.NhomKhuyenMai;
+import iuh.fit.models.NhomSanPham;
+
+import java.rmi.RemoteException;
+import java.util.List;
+
+public class DaoImpl_NhomKhuyenMai implements DAO_NhomKhuyenMai {
+    @Override
+    public List<NhomKhuyenMai> getAllNhomKM() throws RemoteException {
+        return List.of();
+    }
+
+    @Override
+    public boolean createNhomKM(KhuyenMai s, NhomSanPham nsp) throws RemoteException {
+        return false;
+    }
+
+    @Override
+    public boolean deleteNhomKM(KhuyenMai s) throws RemoteException {
+        return false;
+    }
+}
