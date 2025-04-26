@@ -16,9 +16,6 @@ import java.util.List;
 public class KhachHang {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "maKhachHang", length = 50, nullable = false, unique = true)
     private String maKhachHang;
 
@@ -35,6 +32,12 @@ public class KhachHang {
     private String diaChi;
 
     @Temporal(TemporalType.DATE)
+    @Column(
+            name = "ngayDangKy",
+            columnDefinition = "DATE DEFAULT CURRENT_DATE",
+            insertable = false,
+            updatable = false
+    )
     private Date ngayDangKy;
 
     private Boolean trangThai;
