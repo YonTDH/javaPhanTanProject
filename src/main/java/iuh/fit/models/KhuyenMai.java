@@ -9,17 +9,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "KhuyenMai")
+@Builder
 @NamedQueries({
         @NamedQuery(name = "KhuyenMai.getAlltbKM", query = "SELECT k FROM KhuyenMai k"),
         @NamedQuery(name = "KhuyenMai.getAlltbKMTheoDangChay", query = "SELECT k FROM KhuyenMai k WHERE k.trangThai = 'Đang hoạt động'"),
@@ -57,19 +56,6 @@ public class KhuyenMai implements Serializable {
     @Column(name = "ngayKetThuc")
     private LocalDateTime ngayKetThuc;
 
-    // Constructor đầy đủ
-    public KhuyenMai(String maKhuyenMai, String tenKhuyenMai, String ghiChu, String trangThai, double tyLeKhuyenMai,
-                     double tienToiThieu, double giaTriKhuyenMaiToiDa, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) {
-        this.maKhuyenMai = maKhuyenMai;
-        this.tenKhuyenMai = tenKhuyenMai;
-        this.ghiChu = ghiChu;
-        this.trangThai = trangThai;
-        this.tyLeKhuyenMai = tyLeKhuyenMai;
-        this.tienToiThieu = tienToiThieu;
-        this.giaTriKhuyenMaiToiDa = giaTriKhuyenMaiToiDa;
-        this.ngayBatDau = ngayBatDau;
-        this.ngayKetThuc = ngayKetThuc;
-    }
 
     public KhuyenMai(String maKhuyenMai) {
         this.maKhuyenMai = maKhuyenMai;
