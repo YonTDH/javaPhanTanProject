@@ -1,7 +1,7 @@
-// src/main/java/iuh/fit/models/ChiTietHoanTra.java
 package iuh.fit.models;
 
 import java.io.Serializable;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -54,5 +54,4 @@ public class ChiTietHoanTra implements Serializable {
         this.soLuong = soLuong;
         this.thanhTien = thanhTien;
     }
-
 }
