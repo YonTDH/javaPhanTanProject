@@ -14,6 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "NhomSanPham")
+@Builder
 @NamedQueries({
         @NamedQuery(name = "NhomSanPham.getAll", query = "SELECT n FROM NhomSanPham n"),
         @NamedQuery(name = "NhomSanPham.findByTen", query = "SELECT n FROM NhomSanPham n WHERE n.tenNhom = :tenNhom")
