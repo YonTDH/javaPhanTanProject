@@ -18,10 +18,14 @@ public class DaoImpl_NhanVien implements DAO_NhanVien {
         this.em = AppUtil.getEntityManager();
     }
 
+    public DaoImpl_NhanVien(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     public List<NhanVien> getAllNhanVien_20() throws RemoteException {
         try {
-            TypedQuery<NhanVien> query = em.createQuery("SELECT nv FROM NhanVien nv ORDER BY nv.ngayVaoLam DESC", NhanVien.class);
+            TypedQuery<NhanVien> query = em.createQuery("SELECT nv FROM NhanVien nv ", NhanVien.class);
             query.setMaxResults(20);
             return query.getResultList();
         } catch (Exception e) {
@@ -84,13 +88,11 @@ public class DaoImpl_NhanVien implements DAO_NhanVien {
             em.getTransaction().begin();
             NhanVien nvCu = em.find(NhanVien.class, maNVSua);
             if (nvCu != null) {
-                nvCu.setTenNhanVien(nvMoi.getTenNhanVien());
+                nvCu.setHoTenNV(nvMoi.getHoTenNV());
                 nvCu.setSoDienThoai(nvMoi.getSoDienThoai());
                 nvCu.setEmail(nvMoi.getEmail());
-                nvCu.setDiaChi(nvMoi.getDiaChi());
-                nvCu.setNgayVaoLam(nvMoi.getNgayVaoLam());
                 nvCu.setCaLamViec(nvMoi.getCaLamViec());
-                nvCu.setTrangThai(nvMoi.getTrangThai());
+                nvCu.setTinhTrangLamViec(nvMoi.getTinhTrangLamViec());
                 nvCu.setChucVu(nvMoi.getChucVu());
                 nvCu.setTaiKhoan(nvMoi.getTaiKhoan());
                 em.merge(nvCu);
@@ -111,7 +113,8 @@ public class DaoImpl_NhanVien implements DAO_NhanVien {
     public List<NhanVien> locNhanVien(String duLieuTim) throws RemoteException {
         try {
             TypedQuery<NhanVien> query = em.createQuery(
-                    "SELECT nv FROM NhanVien nv WHERE nv.tenNhanVien LIKE :duLieuTim OR nv.soDienThoai LIKE :duLieuTim", NhanVien.class);
+                    "SELECT nv FROM NhanVien nv WHERE nv.hoTenNV " +
+                            "LIKE :duLieuTim OR nv.soDienThoai LIKE :duLieuTim", NhanVien.class);
             query.setParameter("duLieuTim", "%" + duLieuTim + "%");
             return query.getResultList();
         } catch (Exception e) {

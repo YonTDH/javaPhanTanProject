@@ -14,8 +14,12 @@ import java.util.List;
 public class DaoImpl_KhachHang implements DAO_KhachHang {
     private EntityManager em;
 
-    public DaoImpl_KhachHang() {
-        this.em = AppUtil.getEntityManager();
+    public DaoImpl_KhachHang(){
+        em = AppUtil.getEntityManager();
+    }
+
+    public DaoImpl_KhachHang(EntityManager em) {
+        this.em = em;
     }
 
     @Override

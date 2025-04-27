@@ -10,10 +10,16 @@ import java.util.List;
 
 public class DaoImpl_VanPhongPham implements DAO_VanPhongPham {
     private static final long serialVersionUID = 1L;
+
     private EntityManager em;
     public DaoImpl_VanPhongPham() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
+
+    public DaoImpl_VanPhongPham(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     public List<VanPhongPham> getAllVanPhongPhan_20() throws RemoteException {
         try {

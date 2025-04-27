@@ -12,7 +12,7 @@ import jakarta.persistence.EntityTransaction;
 import java.rmi.RemoteException;
 import java.util.List;
 
-class DAOImpl_ChiTietHoaDonDoi implements DAO_ChiTietHoaDonDoi {
+public class DAOImpl_ChiTietHoaDonDoi implements DAO_ChiTietHoaDonDoi {
     private EntityManager em;
 
     public DAOImpl_ChiTietHoaDonDoi() {

@@ -14,7 +14,10 @@ public class DaoImpl_KhuyenMai implements DAO_KhuyenMai {
     private EntityManager em;
 
     public DaoImpl_KhuyenMai() {
-        this.em = AppUtil.getEntityManager();
+        em = AppUtil.getEntityManager();
+    }
+    public DaoImpl_KhuyenMai(EntityManager em) {
+        this.em = em;
     }
 
     @Override

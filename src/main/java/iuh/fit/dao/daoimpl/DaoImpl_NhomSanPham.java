@@ -11,8 +11,13 @@ import java.util.List;
 public class DaoImpl_NhomSanPham implements DAO_NhomSanPham {
     private static final long serialVersionUID = 1L;
     private EntityManager em;
+
     public DaoImpl_NhomSanPham() throws RemoteException {
         em = AppUtil.getEntityManager();
+    };
+
+    public DaoImpl_NhomSanPham(EntityManager em) {
+        this.em = em;
     }
 
     @Override

@@ -24,5 +24,7 @@ public interface DAO_ChiTietHoaDon extends Remote {
 
 	public boolean updateCTHoaDon(ChiTietHoaDon cthd) throws RemoteException;
 
-	
+
+    // Lấy chi tiết hóa đơn theo mã hóa đơn và mã sản phẩm
+    ChiTietHoaDon getHoaDontheoMa(String maHDD, String maSP) throws RemoteException;
 }

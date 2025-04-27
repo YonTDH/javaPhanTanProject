@@ -16,6 +16,10 @@ public class DaoImpl_SanPham implements DAO_SanPham {
         em = AppUtil.getEntityManager();
     }
 
+    public DaoImpl_SanPham(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     public boolean createSanPham(SanPham sp) throws RemoteException {
         try {
