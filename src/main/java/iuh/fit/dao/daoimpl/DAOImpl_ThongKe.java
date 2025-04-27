@@ -3,24 +3,29 @@ package iuh.fit.dao.daoimpl;
 import iuh.fit.dao.DAO_ThongKe;
 import iuh.fit.models.MonthlyRevenueInfo;
 import iuh.fit.models.ProductInfo;
+import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
 
-public class DAOImpl_ThongKe implements DAO_ThongKe {
+public class DAOImpl_ThongKe extends UnicastRemoteObject implements DAO_ThongKe {
     private EntityManager em;
 
-    public DAOImpl_ThongKe() throws RemoteException {
-        em = Persistence.createEntityManagerFactory("QuanLiNhaSachONEEIGHTServer")
-                .createEntityManager();
+    public DAOImpl_ThongKe(EntityManager em) throws RemoteException{
+        this.em = em;
+    }
+
+    public DAOImpl_ThongKe()throws RemoteException{
+        em= AppUtil.getEntityManager();
     }
 
     @Override

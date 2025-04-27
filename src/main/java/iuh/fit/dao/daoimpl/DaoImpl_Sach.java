@@ -6,16 +6,17 @@ import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DaoImpl_Sach implements DAO_Sach {
+public class DaoImpl_Sach extends UnicastRemoteObject implements DAO_Sach {
     private static final long serialVersionUID = 1L;
 
     private EntityManager em;
     public DaoImpl_Sach() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
-    public DaoImpl_Sach(EntityManager em) {
+    public DaoImpl_Sach(EntityManager em)throws RemoteException {
         this.em = em;
     }
 

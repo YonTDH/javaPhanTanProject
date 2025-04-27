@@ -2,21 +2,28 @@ package iuh.fit.dao.daoimpl;
 
 import iuh.fit.dao.DAO_TaiKhoan;
 import iuh.fit.models.TaiKhoan;
+import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import javax.swing.*;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.Random;
 
-public class DaoImpl_TaiKhoan implements DAO_TaiKhoan {
+public class DaoImpl_TaiKhoan extends UnicastRemoteObject implements DAO_TaiKhoan {
     private EntityManager em;
 
     // Constructor để khởi tạo EntityManager
-    public DaoImpl_TaiKhoan(EntityManager em) {
+    public DaoImpl_TaiKhoan(EntityManager em) throws RemoteException{
         this.em = em;
+    }
+
+    public DaoImpl_TaiKhoan() throws RemoteException {
+
+        em = AppUtil.getEntityManager();
     }
 
     @Override

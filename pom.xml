@@ -45,12 +45,12 @@
             <version>4.0.5</version>
         </dependency>
 
-        <!-- MariaDB JDBC Driver -->
-        <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>3.1.4</version>
-        </dependency>
+<!--        &lt;!&ndash; MariaDB JDBC Driver &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.mariadb.jdbc</groupId>-->
+<!--            <artifactId>mariadb-java-client</artifactId>-->
+<!--            <version>3.1.4</version>-->
+<!--        </dependency>-->
 
         <!-- Lombok -->
         <dependency>
@@ -67,6 +67,11 @@
             <version>2.4.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.3.3</version>
+        </dependency>
 
 
     </dependencies>

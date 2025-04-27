@@ -7,17 +7,18 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DAOImpl_HoaDonHoanTra implements DAO_HoaDonHoanTra {
+public class DAOImpl_HoaDonHoanTra extends UnicastRemoteObject implements DAO_HoaDonHoanTra {
 
     private EntityManager em;
 
-    public DAOImpl_HoaDonHoanTra() {
+    public DAOImpl_HoaDonHoanTra() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
 
-    public DAOImpl_HoaDonHoanTra(EntityManager em) {
+    public DAOImpl_HoaDonHoanTra(EntityManager em) throws RemoteException {
         this.em = em;
     }
 

@@ -7,16 +7,17 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DaoImpl_SanPham implements DAO_SanPham {
+public class DaoImpl_SanPham  extends UnicastRemoteObject implements DAO_SanPham {
     private static final long serialVersionUID = 1L;
     private EntityManager em;
     public DaoImpl_SanPham() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
 
-    public DaoImpl_SanPham(EntityManager em) {
+    public DaoImpl_SanPham(EntityManager em) throws RemoteException{
         this.em = em;
     }
 

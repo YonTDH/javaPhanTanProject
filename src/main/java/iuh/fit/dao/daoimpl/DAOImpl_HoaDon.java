@@ -8,20 +8,21 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class DAOImpl_HoaDon implements DAO_HoaDon {
+public class DAOImpl_HoaDon extends UnicastRemoteObject implements DAO_HoaDon {
     private EntityManager em;
 
-    public DAOImpl_HoaDon() {
+    public DAOImpl_HoaDon() throws RemoteException {
         this.em = AppUtil.getEntityManager();
     }
 
-    public DAOImpl_HoaDon(EntityManager em) {
+    public DAOImpl_HoaDon(EntityManager em) throws RemoteException {
         this.em = em;
     }
 

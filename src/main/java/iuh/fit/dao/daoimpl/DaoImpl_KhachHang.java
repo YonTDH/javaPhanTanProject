@@ -8,17 +8,18 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 import java.util.List;
 
-public class DaoImpl_KhachHang implements DAO_KhachHang {
+public class DaoImpl_KhachHang extends UnicastRemoteObject implements DAO_KhachHang {
     private EntityManager em;
 
-    public DaoImpl_KhachHang(){
+    public DaoImpl_KhachHang() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
 
-    public DaoImpl_KhachHang(EntityManager em) {
+    public DaoImpl_KhachHang(EntityManager em) throws RemoteException {
         this.em = em;
     }
 

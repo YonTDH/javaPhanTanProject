@@ -6,16 +6,17 @@ import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DAOImpl_MauSac implements DAO_MauSac {
+public class DAOImpl_MauSac extends UnicastRemoteObject implements DAO_MauSac {
     private EntityManager em;
 
-    public DAOImpl_MauSac() {
+    public DAOImpl_MauSac() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
 
-    public DAOImpl_MauSac(EntityManager em) {
+    public DAOImpl_MauSac(EntityManager em) throws RemoteException {
         this.em = em;
     }
 

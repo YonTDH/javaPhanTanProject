@@ -10,18 +10,19 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DAOImpl_ChiTietHoaDon implements DAO_ChiTietHoaDon {  // Implement đúng interface DAO_ChiTietHoaDon
+public class DAOImpl_ChiTietHoaDon extends UnicastRemoteObject implements DAO_ChiTietHoaDon {  // Implement đúng interface DAO_ChiTietHoaDon
     private EntityManager em;
 
     // Constructor mặc định
-    public DAOImpl_ChiTietHoaDon() {
+    public DAOImpl_ChiTietHoaDon() throws RemoteException {
         em = AppUtil.getEntityManager();  // Giả sử AppUtil trả về EntityManager.
     }
 
     // Constructor với EntityManager
-    public DAOImpl_ChiTietHoaDon(EntityManager em) {
+    public DAOImpl_ChiTietHoaDon(EntityManager em) throws RemoteException {
         this.em = em;
     }
 
