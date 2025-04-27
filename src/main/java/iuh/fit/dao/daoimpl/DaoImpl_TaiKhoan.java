@@ -6,16 +6,15 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
-
 import javax.swing.*;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Random;
 
-
 public class DaoImpl_TaiKhoan implements DAO_TaiKhoan {
     private EntityManager em;
 
+    // Constructor để khởi tạo EntityManager
     public DaoImpl_TaiKhoan(EntityManager em) {
         this.em = em;
     }
@@ -60,6 +59,7 @@ public class DaoImpl_TaiKhoan implements DAO_TaiKhoan {
             // Tạo mã OTP ngẫu nhiên
             int OTP = 100000 + new Random().nextInt(900000);
 
+
             System.out.println("Gửi email đến: " + email);
             System.out.println("Mã OTP của bạn là: " + OTP);
 
@@ -84,7 +84,6 @@ public class DaoImpl_TaiKhoan implements DAO_TaiKhoan {
     @Override
     public boolean doiMatKhau(String email, String newPassword) throws RemoteException {
         try {
-            // Tìm tài khoản theo email
             TypedQuery<TaiKhoan> query = em.createQuery(
                     "SELECT tk FROM TaiKhoan tk WHERE tk.email = :email", TaiKhoan.class
             );
@@ -107,7 +106,7 @@ public class DaoImpl_TaiKhoan implements DAO_TaiKhoan {
             return false;
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback(); // Hủy giao dịch nếu có lỗi
+                em.getTransaction().rollback();
             }
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Lỗi khi đổi mật khẩu: " + e.getMessage());
