@@ -30,7 +30,7 @@ public class DAOImpl_HoaDon implements DAO_HoaDon {
         try {
             LocalDate today = LocalDate.now();
             return em.createQuery(
-                            "SELECT hd FROM HoaDon hd WHERE DATE(hd.ngayTao) = :today",
+                            "SELECT hd FROM HoaDon hd WHERE DATE(hd.ngayLap) = :today",
                             HoaDon.class)
                     .setParameter("today", today)
                     .getResultList();
@@ -134,8 +134,8 @@ public class DAOImpl_HoaDon implements DAO_HoaDon {
             // Truy vấn các mã hóa đơn trong ngày
             TypedQuery<String> query = em.createQuery(
                     "SELECT hd.maHoaDon FROM HoaDon hd " +
-                            "WHERE hd.ngayTao BETWEEN :startDate AND :endDate " +
-                            "ORDER BY hd.ngayTao",
+                            "WHERE hd.ngayLap BETWEEN :startDate AND :endDate " +
+                            "ORDER BY hd.ngayLap",
                     String.class);
 
             query.setParameter("startDate", startDate);

@@ -3,6 +3,8 @@ package iuh.fit.dao.daoimpl;
 import iuh.fit.dao.DAO_ChiTietHoaDonDoi;
 import iuh.fit.models.ChiTietHoaDonDoi;
 import iuh.fit.models.ChiTietHoaDonDoiId;
+import iuh.fit.models.HoaDonDoiHang;
+import iuh.fit.models.SanPham;
 import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -71,10 +73,24 @@ class DAOImpl_ChiTietHoaDonDoi implements DAO_ChiTietHoaDonDoi {
     @Override
     public ChiTietHoaDonDoi getHoaDontheoMa(String maHDD, String maSP) throws RemoteException {
         try {
-            ChiTietHoaDonDoiId id = new ChiTietHoaDonDoiId(maHDD, maSP);
+            // Tìm HoaDonDoiHang theo maHDD
+            HoaDonDoiHang hoaDonDoiHang = em.createQuery(
+                            "FROM HoaDonDoiHang h WHERE h.maHoaDonDoi = :maHDD", HoaDonDoiHang.class)
+                    .setParameter("maHDD", maHDD)
+                    .getSingleResult();
+
+            // Tìm SanPham theo maSP
+            SanPham sanPham = em.createQuery(
+                            "FROM SanPham s WHERE s.maSanPham = :maSP", SanPham.class)
+                    .setParameter("maSP", maSP)
+                    .getSingleResult();
+
+            // Tạo ChiTietHoaDonDoiId với các đối tượng vừa tìm được
+            ChiTietHoaDonDoiId id = new ChiTietHoaDonDoiId(hoaDonDoiHang, sanPham);
+
+            // Truy vấn ChiTietHoaDonDoi theo id
             return em.createQuery(
-                            "FROM ChiTietHoaDonDoi c WHERE c.id = :id",
-                            ChiTietHoaDonDoi.class)
+                            "FROM ChiTietHoaDonDoi c WHERE c.id = :id", ChiTietHoaDonDoi.class)
                     .setParameter("id", id)
                     .getSingleResult();
         } catch (Exception e) {

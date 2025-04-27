@@ -20,7 +20,7 @@ public class DaoImpl_KhachHang implements DAO_KhachHang {
 
     @Override
     public List<KhachHang> getAllKhachHang_20() throws RemoteException {
-        return em.createQuery("SELECT k FROM KhachHang k ORDER BY k.ngayDangKy DESC", KhachHang.class)
+        return em.createQuery("SELECT k FROM KhachHang k", KhachHang.class)
                 .setMaxResults(20).getResultList();
     }
 
@@ -70,7 +70,7 @@ public class DaoImpl_KhachHang implements DAO_KhachHang {
     @Override
     public List<KhachHang> timKhachHangTheoThongTin(String data) throws RemoteException {
         return em.createQuery(
-                        "SELECT k FROM KhachHang k WHERE k.tenKhachHang LIKE :data OR k.email LIKE :data OR k.soDienThoai LIKE :data",
+                        "SELECT k FROM KhachHang k WHERE k.hoTenKH LIKE :data OR k.email LIKE :data OR k.soDienThoai LIKE :data",
                         KhachHang.class)
                 .setParameter("data", "%" + data + "%").getResultList();
     }
@@ -106,12 +106,7 @@ public class DaoImpl_KhachHang implements DAO_KhachHang {
 
     @Override
     public List<KhachHang> getKhachHangTrong1Thang() throws RemoteException {
-        Date now = new Date();
-        Date lastMonth = new Date(now.getTime() - (30L * 24 * 60 * 60 * 1000));
-
-        return em.createQuery("SELECT k FROM KhachHang k WHERE k.ngayDangKy >= :lastMonth", KhachHang.class)
-                .setParameter("lastMonth", lastMonth)
-                .getResultList();
+       return null;
     }
 
     @Override

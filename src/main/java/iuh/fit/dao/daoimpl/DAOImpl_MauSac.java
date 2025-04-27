@@ -41,7 +41,7 @@ public class DAOImpl_MauSac implements DAO_MauSac {
     @Override
     public MauSac getMauSactheoTen(String ten) throws RemoteException {
         try {
-            return em.createQuery("FROM MauSac m WHERE m.tenMau = :ten", MauSac.class)
+            return em.createQuery("FROM MauSac m WHERE m.tenMauSac = :ten", MauSac.class)
                     .setParameter("ten", ten)
                     .getSingleResult();
         } catch (Exception e) {
