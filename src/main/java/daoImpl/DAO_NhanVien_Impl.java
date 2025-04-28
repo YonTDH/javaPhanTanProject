@@ -109,7 +109,7 @@ public class DAO_NhanVien_Impl extends UnicastRemoteObject implements DAO_NhanVi
 	@Override
 	public List<NhanVien> locNhanVien(String duLieuTim) throws RemoteException {
 		// TODO Auto-generated method stub
-		return em.createNamedQuery("NhanVien.locNhanVien", NhanVien.class).setParameter("value", "%"+duLieuTim+"%")
+		return em.createNamedQuery("NhanVien.locNhanVien", NhanVien.class).setParameter("data", "%"+duLieuTim+"%")
 				.getResultList();
 	}
 
@@ -124,12 +124,13 @@ public class DAO_NhanVien_Impl extends UnicastRemoteObject implements DAO_NhanVi
 	@Override
 	public String getMaNhanVienQLDB() throws RemoteException {
 		// TODO Auto-generated method stub
-		String queryString = "SELECT top 1 maNhanVien\n" + "FROM NhanVien\n" + "WHERE maNhanVien like 'QL%'\n"
-				+ "ORDER BY CONVERT(DATE, RIGHT(LEFT(maNhanVien, 8), 4) + SUBSTRING(maNhanVien, 5, 2) \n"
-				+ "+ RIGHT(maNhanVien, 2), 112) DESC, CAST(SUBSTRING(maNhanVien, 11, LEN(maNhanVien)) AS INT) \n"
-				+ "DESC";
-		Query query = em.createQuery(queryString, NhanVien.class);
-		return query.toString();
+		String queryString = "SELECT maNhanVien FROM NhanVien " +
+				"WHERE maNhanVien like 'QL%' " +
+				"ORDER BY STR_TO_DATE(CONCAT(SUBSTRING(maNhanVien, 5, 2), '/', SUBSTRING(maNhanVien, 7, 2), '/', SUBSTRING(maNhanVien, 9, 2)), '%d/%m/%y') DESC, " +
+				"CAST(SUBSTRING(maNhanVien, 11) AS UNSIGNED) DESC LIMIT 1";
+
+		Query query = em.createNativeQuery(queryString);
+		return (String) query.getSingleResult();
 	}
 
 	@Override
