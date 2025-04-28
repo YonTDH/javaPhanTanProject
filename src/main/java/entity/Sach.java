@@ -32,9 +32,6 @@ import lombok.ToString;
 
 public class Sach extends SanPham implements Serializable {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -227605300086694239L;
 	@Column(name = "tacGia", columnDefinition = "nvarchar(255)")
 	private String tacGia;

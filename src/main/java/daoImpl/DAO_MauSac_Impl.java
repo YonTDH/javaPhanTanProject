@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daoImpl;
 
 import dao.DAO_MauSac;
@@ -12,15 +8,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-/**
- *
- * @author nguyen chau tai
- */
 public class DAO_MauSac_Impl extends UnicastRemoteObject implements DAO_MauSac {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5502941866464467312L;
 	private EntityManager em;
 	

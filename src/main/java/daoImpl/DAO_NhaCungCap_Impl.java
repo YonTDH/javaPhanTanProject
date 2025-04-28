@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daoImpl;
 
 import java.rmi.RemoteException;
@@ -12,20 +8,10 @@ import dao.DAO_NhaCungCap;
 import entity.NhaCungCap;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
 
-/**
- *
- * @author nguyen chau tai
- */
 public class DAO_NhaCungCap_Impl extends UnicastRemoteObject implements DAO_NhaCungCap {
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1333726291988341144L;
 	private EntityManager em;
 	public DAO_NhaCungCap_Impl() throws RemoteException {

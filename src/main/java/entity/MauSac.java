@@ -28,9 +28,7 @@ import lombok.Setter;
 
 
 public class MauSac implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8915500877956954406L;
 	@Id
 	private String maMau;

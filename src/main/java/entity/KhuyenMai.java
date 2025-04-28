@@ -32,9 +32,7 @@ import jakarta.persistence.NamedQuery;
 
 
 public class KhuyenMai implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 9148093557088718028L;
 	@Id
     private String maKhuyenMai;
@@ -50,10 +48,7 @@ public class KhuyenMai implements Serializable {
     private LocalDateTime ngayBatDau;
     private LocalDateTime ngayKetThuc;
     
-    
-	/**
-	 * @return the maKhuyenMai
-	 */
+
 	
 	public KhuyenMai(String maKhuyenMai, String tenKhuyenMai, String ghiChu, String trangThai, double tyLeKhuyenMai,
 			double tienToiThieu, double giaTriKhuyenMaiToiDa, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws Exception{

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entity;
 
 import java.io.Serializable;
@@ -41,9 +37,7 @@ import lombok.ToString;
 
 
 public class HoaDonDoiHang implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 7374626181841798328L;
 	@Id
     private String maHoaDonDoi;

@@ -1,36 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daoImpl;
 
 import dao.DAO_Sach;
-import entity.NhaCungCap;
-import entity.NhomSanPham;
 import entity.Sach;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Persistence;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.time.LocalDateTime;
 import java.util.List;
 
-
-/**
- *
- * @author nguyen chau tai
- */
 public class DAO_Sach_Impl extends UnicastRemoteObject implements DAO_Sach {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8887115316213807751L;
 	private EntityManager em;
 	

@@ -37,9 +37,6 @@ import lombok.ToString;
 	@NamedQuery(name = "ChiTietHoaDonDoi.getHoaDontheoMa", query = "SELECT c FROM ChiTietHoaDonDoi c WHERE c.hoaDonDoiHang = :maHDD AND c.sanPham = :maSP")
 })
 public class ChiTietHoaDonDoi implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 267692227133307790L;
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

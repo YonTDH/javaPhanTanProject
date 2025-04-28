@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daoImpl;
 
 import dao.DAO_ChiTietHoaDonHoanTra;
@@ -15,9 +11,6 @@ import java.util.List;
 
 public class DAO_ChiTietHoaDonHoanTra_Impl extends UnicastRemoteObject implements DAO_ChiTietHoaDonHoanTra {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3114920457768973935L;
 	private EntityManager em;
 	

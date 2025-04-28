@@ -1,6 +1,5 @@
 package daoImpl;
 
-
 import java.util.List;
 
 import dao.DAO_TaiKhoan;
@@ -28,9 +27,7 @@ import javax.mail.internet.MimeMessage;
 
 
 public class DAO_TaiKhoan_Impl extends UnicastRemoteObject implements DAO_TaiKhoan {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2048486198189875668L;
 	private EntityManager em;
 	

@@ -31,9 +31,6 @@ import lombok.Setter;
 
 
 public class NhomSanPham implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5697854377525315292L;
 	@Id
 	private String maNhomSanPham;

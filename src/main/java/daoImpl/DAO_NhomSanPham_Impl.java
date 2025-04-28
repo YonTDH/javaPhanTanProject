@@ -13,15 +13,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-/**
- *
- * @author nguyen chau tai
- */
 public class DAO_NhomSanPham_Impl  extends UnicastRemoteObject implements DAO_NhomSanPham {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2992187727791305003L;
 	private EntityManager em;
 	

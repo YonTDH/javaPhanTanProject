@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daoImpl;
 
 import java.rmi.RemoteException;
@@ -15,15 +11,8 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
-/**
- *
- * @author nguyen chau tai
- */
 public class DAO_NhanVien_Impl extends UnicastRemoteObject implements DAO_NhanVien {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8896963786098893491L;
 	private EntityManager em;
 

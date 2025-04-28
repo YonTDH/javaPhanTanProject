@@ -24,9 +24,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "CaLamViec")
 public class CaLamViec implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7220260694252736743L;
 	@Id
 	private String maCa;

@@ -19,10 +19,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Persistence;
 
 public class DAO_SanPham_Impl extends UnicastRemoteObject implements DAO_SanPham {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -61621119853449674L;
 	
 	private EntityManager em;

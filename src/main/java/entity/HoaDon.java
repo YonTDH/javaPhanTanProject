@@ -35,9 +35,6 @@ import lombok.ToString;
 
 
 public class HoaDon implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3812769171560799958L;
 	@Id
     private String maHoaDon;

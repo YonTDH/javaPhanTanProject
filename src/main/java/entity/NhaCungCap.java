@@ -38,10 +38,6 @@ import lombok.Setter;
 
 public class NhaCungCap implements Serializable{
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8830915878779031702L;
 	@Id
 	private String maNCC;

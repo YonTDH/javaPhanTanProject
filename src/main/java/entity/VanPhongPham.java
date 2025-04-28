@@ -32,9 +32,7 @@ import lombok.ToString;
 
 
 public class VanPhongPham extends SanPham implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -2934180625419100087L;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mauSac")

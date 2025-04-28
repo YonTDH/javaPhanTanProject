@@ -34,9 +34,7 @@ import lombok.ToString;
 
 
 public class TaiKhoan implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2374252324184671506L;
 	@Id
 	private String tenDangNhap;

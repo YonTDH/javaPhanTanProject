@@ -3,11 +3,6 @@ package entity;
 import java.io.Serializable;
 
 public class ProductInfo implements Serializable{
-	
-
-		/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2991298280989446708L;
 		private String productId;
         private int totalQuantity;

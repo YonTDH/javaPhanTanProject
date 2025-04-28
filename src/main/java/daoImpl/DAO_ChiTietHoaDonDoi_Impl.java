@@ -1,37 +1,21 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package daoImpl;
+ */package daoImpl;
 
 import dao.DAO_ChiTietHoaDonDoi;
-import entity.ChiTietHoaDon;
 import entity.ChiTietHoaDonDoi;
-import entity.HoaDon;
-import entity.HoaDonDoiHang;
-import entity.SanPham;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 
 public class DAO_ChiTietHoaDonDoi_Impl extends UnicastRemoteObject implements DAO_ChiTietHoaDonDoi {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8761746815486691066L;
 	private EntityManager em;
 	

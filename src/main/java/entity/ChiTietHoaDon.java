@@ -32,10 +32,6 @@ import lombok.ToString;
 })
 
 public class ChiTietHoaDon implements Serializable {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 4826746826060222945L;
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

@@ -38,9 +38,6 @@ import jakarta.persistence.NamedQuery;
 })
 
 public class KhachHang implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4775110070764260836L;
 	@Id
 	private String maKhachHang;

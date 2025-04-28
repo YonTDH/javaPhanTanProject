@@ -48,9 +48,6 @@ import lombok.ToString;
     })
 
 public class NhanVien implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5549263630083775424L;
 	@Id
 	@Column(name = "maNhanVien", columnDefinition = "nvarchar(255)")

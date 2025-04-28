@@ -14,9 +14,6 @@ import java.util.List;
 
 public class DAO_NhomKhuyenMai_Impl extends UnicastRemoteObject implements DAO_NhomKhuyenMai {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2337545081784006114L;
 	private EntityManager em;
 	

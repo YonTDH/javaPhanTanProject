@@ -20,9 +20,6 @@ import java.util.List;
 
 public class DAO_HoaDon_Impl extends UnicastRemoteObject implements DAO_HoaDon {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 714446006887423242L;
 	private EntityManager em;
 	
