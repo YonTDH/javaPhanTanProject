@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import utils.HashPassword;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -29,49 +30,28 @@ import javax.mail.internet.MimeMessage;
 public class DAO_TaiKhoan_Impl extends UnicastRemoteObject implements DAO_TaiKhoan {
 
 	private static final long serialVersionUID = 2048486198189875668L;
-	private EntityManager em;
+	private static EntityManager em;
 	
 	public DAO_TaiKhoan_Impl() throws RemoteException {
 		em = Persistence.createEntityManagerFactory("QuanLiNhaSachONEEIGHTServer")
 				.createEntityManager();
 	}
 
-	public static boolean xacThucNguoiDung(String tenDangNhap, String matKhau) {
-//		ConnectDB.getInstance();
-//		Connection con = ConnectDB.getConnection();
-//		PreparedStatement state = null;
-//		ResultSet resultSet = null;
-//		try {
-//			con = ConnectDB.getConnection();
-//			String query = "SELECT * FROM TaiKhoan WHERE email = ?";
-//			state = con.prepareStatement(query);
-//			state.setString(1, tenDangNhap);
-//			resultSet = state.executeQuery();
-//			if (resultSet.next()) {
-//				String xacThucMatKhau = resultSet.getString("matkhau");
-//				if (xacThucMatKhau.equals(matKhau)) {
-//
-//					//	                JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
-//					// mở frm chính
-//					FrmChinh frmChinh = new FrmChinh();
-//					frmChinh.setVisible(true);
-//					return true;
-//				} else {
-//					// Mật khẩu sai
-//					JOptionPane.showMessageDialog(null, "Sai mật khẩu");
-//					return false;
-//				}
-//			} else {
-//				// Tên đăng nhập không tồn tại
-//				JOptionPane.showMessageDialog(null, "Tên đăng nhập không tồn tại");
-//				return false;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			JOptionPane.showMessageDialog(null, "Lỗi SQL");
-//			return false;
-//		}
-		return true;
+	public  boolean xacThucNguoiDung(String tenDangNhap, String matKhau) {
+		try {
+			TaiKhoan tk = em.find(TaiKhoan.class, tenDangNhap);
+
+			if (tk == null) {
+				return false;
+			}
+
+			String hashPasswordInput = HashPassword.hashPassword(matKhau);
+			return tk.getMatKhau().equals(hashPasswordInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
