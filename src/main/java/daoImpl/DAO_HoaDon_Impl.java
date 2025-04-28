@@ -1,5 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package daoImpl;
 
+/**
+ *
+ * @author nguyen chau tai
+ */
 import dao.DAO_HoaDon;
 import entity.HoaDon;
 import jakarta.persistence.EntityManager;
@@ -12,6 +20,9 @@ import java.util.List;
 
 public class DAO_HoaDon_Impl extends UnicastRemoteObject implements DAO_HoaDon {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 714446006887423242L;
 	private EntityManager em;
 	

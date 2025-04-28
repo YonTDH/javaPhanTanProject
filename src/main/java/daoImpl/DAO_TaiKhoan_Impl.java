@@ -6,8 +6,10 @@ import java.util.List;
 import dao.DAO_TaiKhoan;
 import entity.TaiKhoan;
 //import gui.FrmChinh;
-import jakarta.persistence.*;
-import utils.HashPassword;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -37,23 +39,42 @@ public class DAO_TaiKhoan_Impl extends UnicastRemoteObject implements DAO_TaiKho
 				.createEntityManager();
 	}
 
-	@Override
-	public boolean xacThucNguoiDung(String tenDangNhap, String matKhau) throws RemoteException {
-		try {
-			Query query = em.createQuery("SELECT u FROM TaiKhoan u WHERE u.tenDangNhap = :tenDangNhap");
-			query.setParameter("tenDangNhap", tenDangNhap);
-
-			TaiKhoan taiKhoan = (TaiKhoan) query.getSingleResult();
-
-			if (taiKhoan != null) {
-				String hashedPassword = HashPassword.hashPassword(matKhau);
-				return hashedPassword.equals(taiKhoan.getMatKhau());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return false;
+	public static boolean xacThucNguoiDung(String tenDangNhap, String matKhau) {
+//		ConnectDB.getInstance();
+//		Connection con = ConnectDB.getConnection();
+//		PreparedStatement state = null;
+//		ResultSet resultSet = null;
+//		try {
+//			con = ConnectDB.getConnection();
+//			String query = "SELECT * FROM TaiKhoan WHERE email = ?";
+//			state = con.prepareStatement(query);
+//			state.setString(1, tenDangNhap);
+//			resultSet = state.executeQuery();
+//			if (resultSet.next()) {
+//				String xacThucMatKhau = resultSet.getString("matkhau");
+//				if (xacThucMatKhau.equals(matKhau)) {
+//
+//					//	                JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
+//					// mở frm chính
+//					FrmChinh frmChinh = new FrmChinh();
+//					frmChinh.setVisible(true);
+//					return true;
+//				} else {
+//					// Mật khẩu sai
+//					JOptionPane.showMessageDialog(null, "Sai mật khẩu");
+//					return false;
+//				}
+//			} else {
+//				// Tên đăng nhập không tồn tại
+//				JOptionPane.showMessageDialog(null, "Tên đăng nhập không tồn tại");
+//				return false;
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			JOptionPane.showMessageDialog(null, "Lỗi SQL");
+//			return false;
+//		}
+		return true;
 	}
 
 	@Override
@@ -151,8 +172,7 @@ public class DAO_TaiKhoan_Impl extends UnicastRemoteObject implements DAO_TaiKho
 	        TaiKhoan taiKhoan = query.getSingleResult();
 	        
 	        // Cập nhật mật khẩu của người dùng thành mật khẩu mới
-	        taiKhoan.setMatKhau(HashPassword.hashPassword(newPassword));
-
+	        taiKhoan.setMatKhau(newPassword);
 	        
 	        // Lưu thay đổi vào cơ sở dữ liệu
 	        em.merge(taiKhoan);

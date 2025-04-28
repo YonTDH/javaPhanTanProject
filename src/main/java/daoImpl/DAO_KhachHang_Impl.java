@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package daoImpl;
 
 import java.math.BigDecimal;
@@ -12,8 +16,15 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
+/**
+ *
+ * @author nguyen chau tai
+ */
 public class DAO_KhachHang_Impl extends UnicastRemoteObject implements DAO_KhachHang {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 5008687694217238743L;
 	private EntityManager em;
 

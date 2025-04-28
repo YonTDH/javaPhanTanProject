@@ -1,6 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package daoImpl;
 
 import entity.ChiTietHoaDon;
+import entity.HoaDon;
+import entity.SanPham;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
@@ -14,6 +20,9 @@ import dao.DAO_ChiTietHoaDon;
 
 public class DAO_ChiTietHoaDon_Impl extends UnicastRemoteObject implements DAO_ChiTietHoaDon {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = -2886598129078393935L;
 	private EntityManager em;
 	
