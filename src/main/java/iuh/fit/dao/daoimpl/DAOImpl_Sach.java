@@ -4,83 +4,69 @@ import iuh.fit.dao.DAO_Sach;
 import iuh.fit.models.Sach;
 import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DAOImpl_Sach implements DAO_Sach {
-    private EntityManager em;
+public class DAOImpl_Sach extends UnicastRemoteObject implements DAO_Sach {
+    private static final long serialVersionUID = 1L;
 
-    public DAOImpl_Sach() {
+    private EntityManager em;
+    public DAOImpl_Sach() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
-
-    public DAOImpl_Sach(EntityManager em) {
+    public DAOImpl_Sach(EntityManager em)throws RemoteException {
         this.em = em;
     }
 
     @Override
     public List<Sach> getAlltbSach_20() throws RemoteException {
-        try {
-            return em.createQuery("SELECT s FROM Sach s ORDER BY s.maSanPham DESC", Sach.class)
-                    .setMaxResults(20)
-                    .getResultList();
-        } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy 20 sách mới nhất.", e);
-        }
+        return em.createNamedQuery("Sach.getAlltbSach_20", Sach.class).getResultList();
     }
 
     @Override
     public List<Sach> getAlltbSach() throws RemoteException {
-        try {
-            return em.createQuery("FROM Sach", Sach.class).getResultList();
-        } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy tất cả sách.", e);
-        }
+        return em.createQuery("SELECT s FROM Sach s", Sach.class).getResultList();
     }
 
     @Override
     public boolean createSach(Sach s) throws RemoteException {
-        EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            em.getTransaction().begin();
             em.persist(s);
-            tr.commit();
+            em.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            tr.rollback();
-            throw new RemoteException("Lỗi khi tạo sách.", e);
+            e.printStackTrace();
+            if (em.getTransaction().isActive())
+                em.getTransaction().rollback();
+            return false;
         }
     }
 
     @Override
     public void importExcel(String fileName, String sheetName) throws RemoteException {
-        // Gợi ý: dùng Apache POI để đọc Excel và persist vào DB
-        // Mình để khung sẵn cho bạn triển khai sau.
-        throw new UnsupportedOperationException("Chưa triển khai import Excel.");
+
     }
 
     @Override
     public Sach getSachtheoMa(String ma) throws RemoteException {
-        try {
-            return em.find(Sach.class, ma);
-        } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy sách theo mã.", e);
-        }
+        return em.find(Sach.class, ma);
     }
 
     @Override
     public boolean updateSach(Sach s) throws RemoteException {
-        EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            em.getTransaction().begin();
             em.merge(s);
-            tr.commit();
+            em.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            tr.rollback();
-            throw new RemoteException("Lỗi khi cập nhật sách.", e);
+            e.printStackTrace();
+            if (em.getTransaction().isActive())
+                em.getTransaction().rollback();
+            return false;
         }
     }
 }

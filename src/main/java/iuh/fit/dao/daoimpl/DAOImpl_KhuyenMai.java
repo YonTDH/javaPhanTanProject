@@ -1,7 +1,6 @@
 package iuh.fit.dao.daoimpl;
 
 import iuh.fit.dao.DAO_KhuyenMai;
-import iuh.fit.models.KhachHang;
 import iuh.fit.models.KhuyenMai;
 import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
@@ -10,14 +9,14 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DaoImpl_KhuyenMai extends UnicastRemoteObject implements DAO_KhuyenMai {
+public class DAOImpl_KhuyenMai extends UnicastRemoteObject implements DAO_KhuyenMai {
 
     private EntityManager em;
 
-    public DaoImpl_KhuyenMai() throws RemoteException{
+    public DAOImpl_KhuyenMai() throws RemoteException{
         em = AppUtil.getEntityManager();
     }
-    public DaoImpl_KhuyenMai(EntityManager em) throws RemoteException{
+    public DAOImpl_KhuyenMai(EntityManager em) throws RemoteException{
         this.em = em;
     }
 

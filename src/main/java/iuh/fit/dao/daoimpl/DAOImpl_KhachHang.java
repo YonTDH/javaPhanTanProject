@@ -5,21 +5,19 @@ import iuh.fit.models.KhachHang;
 import iuh.fit.models.NhomKhachHang;
 import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Persistence;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Date;
 import java.util.List;
 
-public class DaoImpl_KhachHang extends UnicastRemoteObject implements DAO_KhachHang {
+public class DAOImpl_KhachHang extends UnicastRemoteObject implements DAO_KhachHang {
     private EntityManager em;
 
-    public DaoImpl_KhachHang() throws RemoteException {
+    public DAOImpl_KhachHang() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
 
-    public DaoImpl_KhachHang(EntityManager em) throws RemoteException {
+    public DAOImpl_KhachHang(EntityManager em) throws RemoteException {
         this.em = em;
     }
 

@@ -9,14 +9,14 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DaoImpl_NhaCungCap extends UnicastRemoteObject implements DAO_NhaCungCap {
+public class DAOImpl_NhaCungCap extends UnicastRemoteObject implements DAO_NhaCungCap {
     private EntityManager entityManager;
 
-    public DaoImpl_NhaCungCap()throws RemoteException {
+    public DAOImpl_NhaCungCap()throws RemoteException {
         entityManager = AppUtil.getEntityManager();
     }
 
-    public DaoImpl_NhaCungCap(EntityManager em) throws RemoteException {
+    public DAOImpl_NhaCungCap(EntityManager em) throws RemoteException {
         this.entityManager = em;
     }
 

@@ -4,96 +4,88 @@ import iuh.fit.dao.DAO_SanPham;
 import iuh.fit.models.SanPham;
 import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DAOImpl_SanPham implements DAO_SanPham {
+public class DAOImpl_SanPham extends UnicastRemoteObject implements DAO_SanPham {
+    private static final long serialVersionUID = 1L;
     private EntityManager em;
-
-    public DAOImpl_SanPham() {
+    public DAOImpl_SanPham() throws RemoteException {
         em = AppUtil.getEntityManager();
     }
 
-    public DAOImpl_SanPham(EntityManager em) {
+    public DAOImpl_SanPham(EntityManager em) throws RemoteException{
         this.em = em;
     }
 
     @Override
     public boolean createSanPham(SanPham sp) throws RemoteException {
-        EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            em.getTransaction().begin();
             em.persist(sp);
-            tr.commit();
+            em.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            tr.rollback();
-            throw new RemoteException("Lỗi khi tạo sản phẩm.", e);
+            e.printStackTrace();
+            em.getTransaction().rollback();
+            return false;
         }
     }
 
     @Override
     public boolean deleteSanPham(String maSP) throws RemoteException {
-        EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
             SanPham sp = em.find(SanPham.class, maSP);
             if (sp != null) {
+                em.getTransaction().begin();
                 em.remove(sp);
-                tr.commit();
+                em.getTransaction().commit();
                 return true;
             }
-            tr.commit();
             return false;
         } catch (Exception e) {
-            tr.rollback();
-            throw new RemoteException("Lỗi khi xóa sản phẩm.", e);
+            e.printStackTrace();
+            em.getTransaction().rollback();
+            return false;
         }
     }
 
     @Override
     public boolean updateSanPham(SanPham sp) throws RemoteException {
-        EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            em.getTransaction().begin();
             em.merge(sp);
-            tr.commit();
+            em.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            tr.rollback();
-            throw new RemoteException("Lỗi khi cập nhật sản phẩm.", e);
+            e.printStackTrace();
+            em.getTransaction().rollback();
+            return false;
         }
     }
 
     @Override
     public SanPham getSanPhamtheoMa(String maSP) throws RemoteException {
-        try {
-            return em.find(SanPham.class, maSP);
-        } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy sản phẩm theo mã.", e);
-        }
+        return em.find(SanPham.class, maSP);
     }
 
     @Override
     public SanPham getSanPhamtheoTen(String tenSP) throws RemoteException {
         try {
-            return em.createQuery("FROM SanPham s WHERE s.tenSanPham = :ten", SanPham.class)
-                    .setParameter("ten", tenSP)
-                    .getSingleResult();
+            TypedQuery<SanPham> query = em.createQuery(
+                    "SELECT sp FROM SanPham sp WHERE sp.tenSanPham = :ten", SanPham.class);
+            query.setParameter("ten", tenSP);
+            return query.getSingleResult();
         } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy sản phẩm theo tên.", e);
+            return null;
         }
     }
 
     @Override
     public List<SanPham> getAllSanPham() throws RemoteException {
-        try {
-            return em.createQuery("FROM SanPham", SanPham.class)
-                    .getResultList();
-        } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy tất cả sản phẩm.", e);
-        }
+        return em.createNamedQuery("SanPham.getAllSanPham", SanPham.class).getResultList();
     }
 }

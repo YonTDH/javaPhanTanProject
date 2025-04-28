@@ -6,37 +6,35 @@ import iuh.fit.util.AppUtil;
 import jakarta.persistence.EntityManager;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DAOImpl_NhomSanPham implements DAO_NhomSanPham {
+public class DAOImpl_NhomSanPham extends UnicastRemoteObject implements DAO_NhomSanPham {
+    private static final long serialVersionUID = 1L;
     private EntityManager em;
 
-    public DAOImpl_NhomSanPham() {
+    public DAOImpl_NhomSanPham() throws RemoteException {
         em = AppUtil.getEntityManager();
-    }
+    };
 
-    public DAOImpl_NhomSanPham(EntityManager em) {
+    public DAOImpl_NhomSanPham(EntityManager em) throws RemoteException{
         this.em = em;
     }
 
     @Override
     public List<NhomSanPham> getAllNhomSanPham() throws RemoteException {
-        try {
-            return em.createQuery("FROM NhomSanPham", NhomSanPham.class)
-                    .getResultList();
-        } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy tất cả nhóm sản phẩm.", e);
-        }
+        return em.createNamedQuery("NhomSanPham.getAll", NhomSanPham.class)
+                .getResultList();
     }
 
     @Override
     public NhomSanPham getNsptheoTen(String ten) throws RemoteException {
         try {
-            return em.createQuery("FROM NhomSanPham n WHERE n.tenNhom = :ten", NhomSanPham.class)
-                    .setParameter("ten", ten)
+            return em.createNamedQuery("NhomSanPham.findByTen", NhomSanPham.class)
+                    .setParameter("tenNhom", ten)
                     .getSingleResult();
         } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy nhóm sản phẩm theo tên.", e);
+            return null;
         }
     }
 
@@ -45,7 +43,6 @@ public class DAOImpl_NhomSanPham implements DAO_NhomSanPham {
         try {
             return em.find(NhomSanPham.class, ma);
         } catch (Exception e) {
-            throw new RemoteException("Lỗi khi lấy nhóm sản phẩm theo mã.", e);
-        }
-    }
+            return null;
+        }    }
 }

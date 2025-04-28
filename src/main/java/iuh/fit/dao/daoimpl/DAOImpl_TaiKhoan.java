@@ -13,15 +13,15 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.Random;
 
-public class DaoImpl_TaiKhoan extends UnicastRemoteObject implements DAO_TaiKhoan {
+public class DAOImpl_TaiKhoan extends UnicastRemoteObject implements DAO_TaiKhoan {
     private EntityManager em;
 
     // Constructor để khởi tạo EntityManager
-    public DaoImpl_TaiKhoan(EntityManager em) throws RemoteException{
+    public DAOImpl_TaiKhoan(EntityManager em) throws RemoteException{
         this.em = em;
     }
 
-    public DaoImpl_TaiKhoan() throws RemoteException {
+    public DAOImpl_TaiKhoan() throws RemoteException {
 
         em = AppUtil.getEntityManager();
     }

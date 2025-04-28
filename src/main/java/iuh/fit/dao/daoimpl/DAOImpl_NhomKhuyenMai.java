@@ -13,14 +13,14 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class DaoImpl_NhomKhuyenMai extends UnicastRemoteObject implements DAO_NhomKhuyenMai {
+public class DAOImpl_NhomKhuyenMai extends UnicastRemoteObject implements DAO_NhomKhuyenMai {
     private EntityManager em;
 
-    public DaoImpl_NhomKhuyenMai() throws RemoteException {
+    public DAOImpl_NhomKhuyenMai() throws RemoteException {
         this.em = AppUtil.getEntityManager();
     }
 
-    public DaoImpl_NhomKhuyenMai(EntityManager em) throws RemoteException {
+    public DAOImpl_NhomKhuyenMai(EntityManager em) throws RemoteException {
         this.em = em;
     }
 
