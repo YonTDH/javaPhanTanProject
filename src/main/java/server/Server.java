@@ -44,7 +44,7 @@ import daoImpl.DAO_VanPhongPham_Impl;
 
 
 public class Server {
-	private static final String URL = "rmi://localhost:7878/";
+	private static final String URL = "rmi://localhost:9090/";
 	public static void main(String[] args) {
 		try {
 		
@@ -69,7 +69,7 @@ public class Server {
 				
 			Context context = new InitialContext();
 			
-			LocateRegistry.createRegistry(7878);
+			LocateRegistry.createRegistry(9090);
 			
 			context.bind(URL + "hoaDon", hoaDon);
             context.bind(URL + "chiTietHoaDon", chiTietHoaDon);

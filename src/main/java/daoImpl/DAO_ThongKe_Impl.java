@@ -31,37 +31,22 @@ public class DAO_ThongKe_Impl extends UnicastRemoteObject implements DAO_ThongKe
     public List<ProductInfo> getTopSellingProducts() throws RemoteException {
         List<ProductInfo> topProducts = new ArrayList<>();
         try {
-            // Lấy ngày bắt đầu và kết thúc của tháng hiện tại
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.DAY_OF_MONTH, 1);
-            Date startDate = calendar.getTime();
-            calendar.add(Calendar.MONTH, 1);
-            calendar.add(Calendar.DATE, -1);
-            Date endDate = calendar.getTime();
-            //
-            // Tạo câu truy vấn SQL
-            String sql = "SELECT od.sanPham, SUM(od.soLuong) AS total_quantity "
-                    + "FROM ChiTietHoaDon od "
-                    + "JOIN HoaDon o ON od.hoaDon = o.maHoaDon "
-                    + "WHERE o.ngayLap BETWEEN ? AND ? "
-                    + "GROUP BY od.sanPham "
-                    + "ORDER BY total_quantity DESC ";
-            // Chuẩn bị và thực thi câu truy vấn
-            Query query = em.createNativeQuery(sql);
-            query.setParameter(1, new java.sql.Date(startDate.getTime()));
-            query.setParameter(2, new java.sql.Date(endDate.getTime()));
-            query.setMaxResults(5);
+            String jpql = "SELECT cthd.sanPham.maSanPham, SUM(cthd.soLuong) as total_quantity " +
+                    "FROM ChiTietHoaDon cthd " +
+                    "GROUP BY cthd.sanPham.maSanPham " +
+                    "ORDER BY total_quantity DESC";
 
+            TypedQuery<Object[]> query = em.createQuery(jpql, Object[].class);
+            query.setMaxResults(5);
 
             List<Object[]> results = query.getResultList();
             for (Object[] result : results) {
                 String productId = (String) result[0];
-                int totalQuantity = (int) result[1];
-                topProducts.add(new ProductInfo(productId, totalQuantity));
+                Long totalQuantity = (Long) result[1];
+                topProducts.add(new ProductInfo(productId, totalQuantity.intValue()));
             }
         } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
+            throw new RemoteException("Error retrieving top selling products (all time)", e);
         }
         return topProducts;
     }
