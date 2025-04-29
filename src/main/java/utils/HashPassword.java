@@ -20,7 +20,7 @@ public class HashPassword {
         }
     }
     public static void main(String[] args) {
-        String password = "123456";
+        String password = "TDH123456";
         String hashedPassword = hashPassword(password);
         System.out.println("Mật khẩu đã được hash: " + hashedPassword);
     }

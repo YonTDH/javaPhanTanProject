@@ -37,9 +37,15 @@ public class DAO_TaiKhoan_Impl extends UnicastRemoteObject implements DAO_TaiKho
 				.createEntityManager();
 	}
 
-	public  boolean xacThucNguoiDung(String tenDangNhap, String matKhau) {
+	public boolean xacThucNguoiDung(String tenDangNhapHoacEmail, String matKhau) {
 		try {
-			TaiKhoan tk = em.find(TaiKhoan.class, tenDangNhap);
+			// JPQL để tìm tài khoản theo tên đăng nhập hoặc email
+			String jpql = "SELECT tk FROM TaiKhoan tk WHERE tk.tenDangNhap = :input OR tk.email = :input";
+			TaiKhoan tk = em.createQuery(jpql, TaiKhoan.class)
+					.setParameter("input", tenDangNhapHoacEmail)
+					.getResultStream()
+					.findFirst()
+					.orElse(null);
 
 			if (tk == null) {
 				return false;
